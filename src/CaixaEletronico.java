@@ -10,7 +10,7 @@ public class CaixaEletronico {
     int notas100=5;
 
     public int total(){
-        return this.notas10+this.notas20+this.notas50+this.notas100;
+        return (this.notas10*10+this.notas20*20+this.notas50*50+this.notas100*100);
     }
 
     public void verificar_saldo() {
@@ -19,32 +19,41 @@ public class CaixaEletronico {
                 Notas de 20: %d
                 Notas de 50: %d
                 Notas de 100: %d
-                """, this.notas10,this.notas20,this.notas50,this.notas100);
+                Total: %d
+                """, this.notas10,this.notas20,this.notas50,this.notas100,this.total());
     }
 
     public void realizar_saque(int num) {
 
         if (num%10!=0){
+            System.out.println("Não é multipo de 10");
             return;
         }
 
         if (num > this.total()){
+            System.out.println("Não tem saldo suficiente");
             return;
         }
 
-        int total=num;
+        while (num>=100 && this.notas100>0){
+            this.notas100--;
+            num -= 100;
+        }
 
-        total -= 100 * (100%total);
-        this.notas100 -= 100%total;
+        while (num>=50 && this.notas50>0) {
+            this.notas50--;
+            num -= 50;
+        }
 
-        total-= 50 * (50%total);
-        this.notas50 -= 50%total;
+        while (num>=20 && this.notas20>0) {
+            this.notas20--;
+            num -= 20;
+        }
 
-        total -=20 * (20%total);
-        this.notas20-= 20%total;
-
-        total-= 10 * (10%total);
-        this.notas10-= 10%total;
+        while (num>=10 && this.notas10>0){
+        this.notas10--;
+        num-= 10;
+        }
 
         System.out.println("Saque realizado!! ");
 

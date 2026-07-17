@@ -7,6 +7,7 @@ public class Main {
         CaixaEletronico caixa = new CaixaEletronico();
         Scanner sc = new Scanner(System.in);
 
+        wile:
         while (true) {
 
             System.out.println("""
@@ -26,6 +27,10 @@ public class Main {
                 case 2:
                     System.out.println("Digite um valor: ");
                     caixa.realizar_saque(sc.nextInt());
+                    break ;
+                case 3:
+                    System.out.println("Saido do Sistema...");
+                    break wile;
                 default:
                     System.out.println("Opção inválida");
             }
